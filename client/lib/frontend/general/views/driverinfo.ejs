@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Drivers' Info | CarGo CarIn</title>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="/gen/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/gen/bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/gen/bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="/gen/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="/gen/dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body class="hold-transition skin-blue layout-top-nav">
+<div class="wrapper">
+<header class="main-header">
+    <nav class="navbar navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="/index" class="navbar-brand"><b>CarGo</b>CarIn</a>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+            <i class="fa fa-bars"></i>
+          </button>
+              <ul class="nav navbar-nav">
+            <li><a href="/index">Find Car<span class="sr-only">(current)</span></a></li>
+            <li><a href="/manage">Manage Reservations</a></li>
+            <li><a href="/transactions">Transactions</a></li>
+          </ul>      
+      </div>
+          <ul class="pull-right nav navbar-nav">
+            <li><a href="/logout">Log out</a></li>
+          </ul>  
+    </div>
+    </nav>
+  </header>
+  <div class="content-wrapper">
+     <% if(Specs.length !== 0){
+            Specs.forEach(function(specs){ %>
+  <div class="container">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="info-box">
+            <div class="info-box-content">
+              <span class="info-box-number">Pickup: </span> <br>
+              <span class="info-box-text">Location: <%= specs.address %> </span><br>
+              <span class="info-box-text">Pickup Date: <%=moment(specs.rentStartdate).format('MMMM D, YYYY');%> </span><br>
+              <span class="info-box-text">Dropoff Date:<%=moment(specs.rentEnddate).format('MMMM D, YYYY');%> </span><br>
+            </div>
+          </div>
+        </div>
+      </div>
+        <div class="container">
+         
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="info-box">
+            <div class="info-box-content">
+              <h1> <%=specs.brand%> <%=specs.model%> </h1> 
+              <img src="/gen/images/car1.jpg" alt="car" height="150" width="250">
+              <h4> Vehicle Information </h4> 
+              <p class="">Owner: <%=specs.firstname%> <%=specs.lastname%></p>
+              <p class="">Year: <%=specs.year%></p>
+              <p class="">Capacity: <%=specs.capacity%></p> 
+              <p class="">Price: <%=specs.rent_Price%></p>
+              <span class="">Car type: <%=specs.carType%></span> <br>
+              <%if(specs.status === 'approved'){%>
+              <span class="info-box-text"><a href="/bookRes/<%=specs.requestID%>"><button class="btn btn-success">Book Now</button></a></span>
+              <%}else if(specs.status === 'booking'){%>
+              <h3 class="">Booked. Please wait for the confirmation of the owner.</h3>
+              <%}else if(specs.status === 'booked'){%>
+              <h3 class="text-success">Booked</h3>
+              <%}else if(specs.status === 'finished'){%>
+              <h3 class="text-success">Transaction Finished. <a href="/transactions">View Transaction</a></h3>
+              <%}else if(specs.status === 'rejected'){%>
+              <h3 class="text-danger">Your request has been rejected. <a href="/transactions">View Transaction</a></h3>
+              <%}else{%>
+              <h3 class="">Request Pending. Please wait for the owner to accept your request.</h3>
+              <%}%>
+
+          </div>
+          </div>
+            </div> 
+       </div>
+          <%})}%>
+        </div> 
+    </div>
+<footer class="main-footer">
+    <div class="container">
+      <div class="pull-right hidden-xs">
+        Raoul and friends.
+      </div>
+      <strong>Copyright &copy; 2018 Group 3.</strong> All rights
+      reserved.
+    </div>
+  </footer>
+</div>
+<script src="/gen/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/gen/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/gen/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/gen/bower_components/fastclick/lib/fastclick.js"></script>
+<script src="/gen/dist/js/adminlte.min.js"></script>
+<script src="/gen/dist/js/demo.js"></script>
+</body>
+</html>

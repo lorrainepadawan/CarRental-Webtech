@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Home | CarGo CarIn</title>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="/gen/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/gen/bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/gen/bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="/gen/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="/gen/dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="plugins/timepicker/bootstrap-timepicker.min.css">
+</head>
+<body class="hold-transition skin-blue layout-top-nav">
+   <header class="main-header">
+    <nav class="navbar navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="/index" class="navbar-brand"><b>CarGo</b>CarIn</a>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+            <i class="fa fa-bars"></i>
+          </button>
+              <ul class="nav navbar-nav">
+            <li><a href="/index">Find Car<span class="sr-only">(current)</span></a></li>
+            <li><a href="/manage">Manage Reservations</a></li>
+            <li class="active"><a href="/transactions">Transactions</a></li>
+          </ul>      
+      </div>
+          <ul class="pull-right nav navbar-nav">
+            <li><a href="/logout">Log out</a></li>
+          </ul>  
+    </div>
+    </nav>
+  </header>
+  <div class="content-wrapper">
+    <div class="container">
+     <section class="content-header">
+        <div class="col-md-12">
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Transactions</h3>
+            </div>
+            
+              <div class="box-body">
+              <table id="reservationTable" class="table">
+               <thead>
+                 <th>Service Provider</th>
+                 <th>Location</th>
+                 <th>Pickup Date</th>
+                 <th>Dropoff Date</th>
+                 <th>Car</th>
+                 <th>Transaction</th>
+                 <th>Status</th>
+               </thead>
+               <%if(transactions){transactions.forEach(function(res){%>
+               <tr>
+                 <td><%=res.firstname%> <%=res.lastname%></td>
+                 <td><%=res.address%></td>
+                 <td><%=moment(res.rentStartdate).format('MMMM D, YYYY');%></td>
+                 <td><%=moment(res.rentEnddate).format('MMMM D, YYYY');%></td>
+                 <td><%=res.brand%> <%=res.model%></td>
+                 <td><%=res.requestType%></td>
+                 <td><%=res.status%></td>
+               </tr>
+               <%})}else{%>
+                <tr>
+                 <td>No Records found.</td>  
+               </tr>
+             <%}%>
+             </table> 
+                </div> 
+              <div class="box-footer">
+                </div>  
+              </div>
+          </div> 
+          
+      </section>
+                </div>   
+                
+            </div>
+            </div>
+<footer class="main-footer">
+    <div class="container">
+      <div class="pull-right hidden-xs">
+        Raoul and friends.
+      </div>
+      <strong>Copyright &copy; 2018 Group 3.</strong> All rights
+      reserved.
+    </div>
+  </footer>
+<script src="/gen/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="/gen/bootstrap/js/bootstrap.min.js"></script>
+<script src="/gen/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+<script src="/gen/dist/js/app.min.js"></script>
+<script src="/gen/dist/js/demo.js"></script>
+<script>
+  $(function () {
+    $(".timepicker").timepicker({
+      showInputs: false
+    });
+  });
+</script>
+</body>
+</html>
